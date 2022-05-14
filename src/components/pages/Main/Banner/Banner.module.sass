@@ -1,0 +1,42 @@
+.banner
+  display: flex
+  background: no-repeat 100%
+  background-size: cover
+  height: 100%
+
+  &__1
+    grid-row-start: 1
+    grid-row-end: 4
+  &__2
+    grid-row-start: 1
+    grid-row-end: 6
+
+  &__3
+    grid-row-start: 4
+    grid-row-end: 10
+
+  &__4
+    grid-row-start: 6
+    grid-row-end: 10
+
+  &__title
+    margin-top: auto
+    background: linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0) )
+    width: 100%
+    color: #fff
+
+    &_small
+      font-size: 20px
+      padding: 20% 10px 10px 25px
+
+    &_big
+      font-size: 32px
+      padding: 20% 0 21px
+      text-align: center
+
+  &__h2
+    text-transform: uppercase
+    font-size: inherit
+
+  &__p
+    font-size: 20px
