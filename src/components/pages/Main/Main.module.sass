@@ -2,18 +2,19 @@
   display: grid
   grid-column-gap: 30px
   height: 75vh
+  grid-template-columns: repeat(6, 1fr)
 
   &__banners
     grid-column-start: 1
-    grid-column-end: 4
+    grid-column-end: 5
     display: grid
     grid-template-columns: repeat(2, 1fr)
     height: inherit
 
   &__products
     display: flex
-    grid-column-start: 4
-    grid-column-end: 6
+    grid-column-start: 5
+    grid-column-end: 7
     flex-direction: column
     height: inherit
 
@@ -21,8 +22,6 @@
       font-size: 20px
       text-align: center
       text-transform: uppercase
-
-    &_btn
 
     &_wrapper
       display: grid
@@ -36,8 +35,4 @@
 @media (max-width: 1440px)
   .main
     &__banners
-      grid-column-start: 1
-      grid-column-end: 4
-      display: grid
       grid-template-columns: repeat(6, 1fr)
-      height: inherit
