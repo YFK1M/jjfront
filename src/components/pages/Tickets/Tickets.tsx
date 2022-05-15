@@ -5,6 +5,7 @@ import TicketStore from '../../../mobx/stores/ticket.store';
 import Ticket from './Ticket/Ticket';
 
 
+
 const Tickets: FC = observer(() => {
 
   const tickets = TicketStore.getAllTickets().map(ticket => {
