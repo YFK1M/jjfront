@@ -6,6 +6,7 @@ import Product from './Product/Product';
 import ProductStore from '../../../mobx/stores/product.store';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
+import { Link } from 'react-router-dom';
 
 const Main: FC = observer(() => {
 
@@ -36,7 +37,9 @@ const Main: FC = observer(() => {
         <div className={s.main__products_wrapper}>
           {products}
         </div>
-        <button className={s.main__products_btn}>Каталог</button>
+        <Link to={`/merch`}>
+          <button className={s.main__products_btn}>Каталог</button>
+        </Link>
       </div>
     </div>
   );
