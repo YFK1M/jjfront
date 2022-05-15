@@ -26,7 +26,7 @@ const Ticket: FC<ITicket> = ({ match, price }) => {
 
   const firstCommand = match.first_command_id
   const secondCommand = match.second_command_id
-  const date = match.date;
+  const date = match.date.split(',');
 
   return (
     <div className={s.ticket}>
@@ -34,8 +34,8 @@ const Ticket: FC<ITicket> = ({ match, price }) => {
       <Command image={secondCommand.image} title={secondCommand.title}/>
       <div className={s.ticket__btn}>{price} руб.</div>
       <div className={s.ticket__date}>
-        <div className={s.ticket__day}>22.04.2022</div>
-        <div className={s.ticket__time}>16:00</div>
+        <div className={s.ticket__day}>{date[0]}</div>
+        <div className={s.ticket__time}>{date[1]}</div>
       </div>
     </div>
   );

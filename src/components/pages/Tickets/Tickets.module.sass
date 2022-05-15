@@ -19,3 +19,17 @@
     grid-column-gap: 40px
     grid-row-gap: 40px
     margin-top: 40px
+
+@media (max-width: 1440px)
+  .tickets
+    &__h1
+      font-size: 26px
+    &__content
+      grid-template-columns: repeat(2, 1fr)
+
+@media (max-width: 768px)
+  .tickets
+    &__h1
+      font-size: 20px
+    &__content
+      grid-template-columns: repeat(1, 1fr)
