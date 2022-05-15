@@ -1,9 +1,35 @@
-import {FC} from "react";
+import { FC, memo, useRef, useState } from 'react';
 import s from "./Navbar.module.sass";
 import {Link} from "react-router-dom";
 import logo from "../../../assets/images/all/logo.svg"
+import { REG_LOG_TABS_TYPES } from '../../../assets/constants/reglog.constant';
+import RegLogModal from '../RegLog/RegLogModal';
 
 const Navbar: FC = () => {
+    const [isModalOpened, setIsModalOpened] = useState(false)
+    const [modalOpenedType, setModalOpenedType] = useState(REG_LOG_TABS_TYPES.SIGN_IN)
+
+    const {current: handleOpenModal} = useRef(() => {
+        setIsModalOpened(true)
+    })
+    const {current: handleCloseModal} = useRef(() => {
+        setIsModalOpened(false)
+    })
+
+    const {current: handleChangeModalOpenedType} = useRef((modalType: string) => {
+        setModalOpenedType(modalType)
+    })
+
+    const {current: handleOpenSignIn} = useRef(() => {
+        setModalOpenedType(REG_LOG_TABS_TYPES.SIGN_IN)
+        setIsModalOpened(true)
+    })
+
+    const {current: handleOpenSignUp} = useRef(() => {
+        setModalOpenedType(REG_LOG_TABS_TYPES.SIGN_UP)
+        setIsModalOpened(true)
+    })
+
     return (
         <div className={s.navbar}>
             <Link to={`/`} className={s.navbar__logo}>
@@ -28,12 +54,17 @@ const Navbar: FC = () => {
                     </div>
                 </div>
                 <div className={s.navbar__buttons}>
-                    <div className={`${s.navbar__button} ${s.navbar__auth}`}>войти</div>
-                    <div className={`${s.navbar__button} ${s.navbar__reg}`}>регистрация</div>
+                    <div className={`${s.navbar__button} ${s.navbar__auth}`} onClick={handleOpenSignIn}>войти</div>
+                    <div className={`${s.navbar__button} ${s.navbar__reg}`} onClick={handleOpenSignUp}>регистрация</div>
                 </div>
             </div>
+            <RegLogModal isModalOpened={isModalOpened}
+                         modalOpenedType={modalOpenedType}
+                         handleOpenModal={handleOpenModal}
+                         handleCloseModal={handleCloseModal}
+                         handleChangeModalOpenedType={handleChangeModalOpenedType}/>
         </div>
     )
 }
 
-export default Navbar
+export default memo(Navbar)
