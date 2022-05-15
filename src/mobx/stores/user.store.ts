@@ -1,9 +1,20 @@
 import { makeAutoObservable } from 'mobx';
-import UserService, { ICreateUser } from '../services/user.service';
+import UserService, { ICreateUser, ILoginUser } from '../services/user.service';
+
+export interface IUser {
+  _id: string,
+  name: string,
+  surname: string,
+  role: string,
+  email: string,
+  password: string,
+  __v?: any
+}
+
 
 class UserStore {
 
-  user = []
+  user: null | IUser = null
   userService = new UserService()
 
   constructor() {
@@ -11,7 +22,16 @@ class UserStore {
   }
 
   createUser = async (user: ICreateUser) => {
-    const res = await this.userService.regUser(user)
+    await this.userService.regUser(user)
+  }
+
+  login = async (user: ILoginUser) => {
+    const res = await this.userService.login(user)
+    this.user = res.data
+  }
+
+  refresh = async () => {
+    const res = await this.userService.refresh()
     this.user = res.data
   }
 }

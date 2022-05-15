@@ -14,7 +14,8 @@ interface IRegLogModal {
 }
 
 export interface IAuthTab {
-  handleChangeModalOpenedType: Function
+  handleChangeModalOpenedType: Function;
+  handleCloseModal: () => void;
 }
 
 const RegLogModal: FC<IRegLogModal> = ({ isModalOpened, modalOpenedType, handleCloseModal, handleOpenModal, handleChangeModalOpenedType }) => {
@@ -24,7 +25,17 @@ const RegLogModal: FC<IRegLogModal> = ({ isModalOpened, modalOpenedType, handleC
       onClose={handleCloseModal}
       title={modalOpenedType === REG_LOG_TABS_TYPES.SIGN_UP ? 'Sign Up' : 'Sign In'}
     >
-      {modalOpenedType === REG_LOG_TABS_TYPES.SIGN_UP ? <SignUpTab handleChangeModalOpenedType={handleChangeModalOpenedType}/> : <SignInTab handleChangeModalOpenedType={handleChangeModalOpenedType}/>}
+      {modalOpenedType === REG_LOG_TABS_TYPES.SIGN_UP ?
+        <SignUpTab
+          handleChangeModalOpenedType={handleChangeModalOpenedType}
+          handleCloseModal={handleCloseModal}
+        />
+        :
+        <SignInTab
+          handleChangeModalOpenedType={handleChangeModalOpenedType}
+          handleCloseModal={handleCloseModal}
+        />
+      }
     </Modal>
   )
 }

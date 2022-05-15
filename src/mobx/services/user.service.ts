@@ -8,10 +8,20 @@ export interface ICreateUser {
   password: string;
 }
 
-class UserService {
+export interface ILoginUser {
+  email: string;
+  password: string;
+}
 
+class UserService {
   regUser = async (user: ICreateUser) => {
     return axios.post(`${host}/user/register`, user)
+  }
+  login = async (user: ILoginUser) => {
+    return axios.post(`${host}/user/login`, user)
+  }
+  refresh = async () => {
+    return axios.get(`${host}/user/self`, {withCredentials: true})
   }
 }
 
