@@ -5,7 +5,7 @@ import { REG_LOG_TABS_TYPES } from '../../../assets/constants/reglog.constant';
 import { observer } from 'mobx-react-lite';
 import UserStore from '../../../mobx/stores/user.store';
 
-const SignUpTab: FC<IAuthTab> = observer(({handleChangeModalOpenedType}) => {
+const SignUpTab: FC<IAuthTab> = observer(({handleChangeModalOpenedType, handleCloseModal}) => {
 
   const [name, setName] = useState<string>('')
   const [surname, setSurname] = useState<string>('')
@@ -40,6 +40,18 @@ const SignUpTab: FC<IAuthTab> = observer(({handleChangeModalOpenedType}) => {
       email,
       password
     })
+    await UserStore.login({
+        email,
+        password
+    })
+    if (UserStore.user) {
+      handleCloseModal()
+      setName('')
+      setSurname('')
+      setEmail('')
+      setPassword('')
+      setRepeatPassword('')
+    }
   }, [name, surname, email, password])
 
   return (
