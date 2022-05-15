@@ -4,6 +4,7 @@ import Navbar from './components/app/Navbar/Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './components/pages/Main/Main';
 import Footer from './components/app/Footer/Footer';
+import Tickets from './components/pages/Tickets/Tickets';
 
 const App: FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: FC = () => {
         <div className={s.main__wrapper}>
           <Routes>
             <Route path={`/`} element={<Main />} />
+            <Route path={`/matches`} element={<Tickets />} />
           </Routes>
         </div>
       </main>

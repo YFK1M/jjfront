@@ -13,7 +13,6 @@ class ProductStore {
 
   getIncompleteProducts = (count: number) => {
     const productSize = this.product.length
-    console.log(toJS(this.product));
     return this.product.slice(productSize - count, productSize)
   }
 
