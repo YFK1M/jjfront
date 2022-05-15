@@ -1,7 +1,7 @@
-import matchesBackground from '../../../assets/main/matchesBackground.png'
-import commandBackground from '../../../assets/main/commandBackground.png'
-import stadiumBackground from '../../../assets/main/stadiumBackground.png'
-const newsBackground = '/assets/images/news/chempionat_win.png'
+import matchesBackground from '../../../assets/images/main/matchesBackground.png'
+import commandBackground from '../../../assets/images/main/commandBackground.png'
+import stadiumBackground from '../../../assets/images/main/stadiumBackground.png'
+import newsBackground from '../../../assets/images/main/newsBackground.png'
 
 
 export const bannersArray = [

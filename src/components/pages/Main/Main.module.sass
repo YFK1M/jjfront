@@ -1,9 +1,43 @@
 .main
-  display: block
-  margin-top: 30px
+  display: grid
+  grid-column-gap: 30px
+  height: 75vh
 
   &__banners
+    grid-column-start: 1
+    grid-column-end: 4
     display: grid
-    //grid-template-rows: 1fr 1.35fr
     grid-template-columns: repeat(2, 1fr)
-    height: 75vh
+    height: inherit
+
+  &__products
+    display: flex
+    grid-column-start: 4
+    grid-column-end: 6
+    flex-direction: column
+    height: inherit
+
+    &_h3
+      font-size: 20px
+      text-align: center
+      text-transform: uppercase
+
+    &_btn
+
+    &_wrapper
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      grid-template-rows: repeat(3, calc(32% + 3px))
+      grid-column-gap: 10px
+      grid-row-gap: 10px
+      padding: 10px 0
+      height: calc(100% - 30px)
+
+@media (max-width: 1440px)
+  .main
+    &__banners
+      grid-column-start: 1
+      grid-column-end: 4
+      display: grid
+      grid-template-columns: repeat(6, 1fr)
+      height: inherit

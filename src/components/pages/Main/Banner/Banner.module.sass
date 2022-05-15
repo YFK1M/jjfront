@@ -1,12 +1,13 @@
 .banner
   display: flex
-  background: no-repeat 100%
+  background: no-repeat center center
   background-size: cover
   height: 100%
 
   &__1
     grid-row-start: 1
     grid-row-end: 4
+
   &__2
     grid-row-start: 1
     grid-row-end: 6
@@ -21,7 +22,7 @@
 
   &__title
     margin-top: auto
-    background: linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0) )
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))
     width: 100%
     color: #fff
 
@@ -40,3 +41,31 @@
 
   &__p
     font-size: 20px
+
+@media (max-width: 1440px)
+  .banner
+    &__1
+      grid-column-start: 1
+      grid-column-end: 5
+
+    &__2
+      grid-column-start: 5
+      grid-column-end: 7
+
+    &__3
+      grid-column-start: 1
+      grid-column-end: 5
+
+    &__4
+      grid-column-start: 5
+      grid-column-end: 7
+
+    &__title
+      &_small
+        font-size: 16px
+
+      &_big
+        font-size: 20px
+
+    &__p
+      font-size: 16px

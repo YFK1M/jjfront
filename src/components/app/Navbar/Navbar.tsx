@@ -1,7 +1,7 @@
 import {FC} from "react";
 import s from "./Navbar.module.sass";
 import {Link} from "react-router-dom";
-import logo from "../../../assets/all/logo.svg"
+import logo from "../../../assets/images/all/logo.svg"
 
 const Navbar: FC = () => {
     return (
