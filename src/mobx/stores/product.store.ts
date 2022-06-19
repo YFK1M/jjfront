@@ -1,6 +1,6 @@
-import { makeAutoObservable} from 'mobx'
+import { makeAutoObservable, toJS } from 'mobx'
 import ProductService from '../services/product.service'
-import { IProductsType } from '../../intarfaces/product/IProductTypeInterface'
+import { IProductsType, IProductsTypeCreate } from '../../intarfaces/product/IProductTypeInterface'
 import { ISortingProducts } from '../../intarfaces/product/ISortingProducts'
 
 class ProductStore {
@@ -27,6 +27,12 @@ class ProductStore {
 
     getAllProducts = () => {
         return this.product
+    }
+
+    setProductType = async (category: IProductsTypeCreate) => {
+        await this.productService.setProductType(category)
+        await this.loadProductsTypes()
+        await this.loadSortingProducts()
     }
 
     getIncompleteProducts = (count: number) => {

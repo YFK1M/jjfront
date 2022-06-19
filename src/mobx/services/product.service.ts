@@ -1,4 +1,5 @@
 import { host } from '../../assets/constants/host.constant'
+import { IProductsTypeCreate } from '../../intarfaces/product/IProductTypeInterface'
 
 class ProductService {
 
@@ -12,6 +13,10 @@ class ProductService {
 
     getProduct = async () => {
         return fetch(`${host}/product/all-products`).then(data => data.json())
+    }
+
+    setProductType = async (category: IProductsTypeCreate) => {
+        return fetch(`${host}/product/type/create`, {method: 'POST', body: JSON.stringify(category), headers: {'Content-Type': 'application/json'}})
     }
 }
 

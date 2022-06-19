@@ -15,10 +15,11 @@ class UserStore {
 
     user: null | IUser = null
     userService = new UserService()
+    isAdmin = false
 
     constructor() {
         makeAutoObservable(this)
-        this.refresh()
+        this.refresh().then(() => this.isAdmin = this.user?.role === 'admin')
     }
 
     createUser = async (user: ICreateUser) => {
