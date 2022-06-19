@@ -1,6 +1,6 @@
-import { FC, ReactChild } from 'react';
-import s from './Ticket.module.sass';
-import Command from './Command/Command';
+import { FC, ReactChild } from 'react'
+import s from './Ticket.module.sass'
+import Command from './Command/Command'
 
 interface ITicket {
   price: number,
@@ -24,21 +24,21 @@ interface ICommand {
 
 const Ticket: FC<ITicket> = ({ match, price }) => {
 
-  const firstCommand = match.first_command_id
-  const secondCommand = match.second_command_id
-  const date = match.date.split(',');
+    const firstCommand = match.first_command_id
+    const secondCommand = match.second_command_id
+    const date = match.date.split(',')
 
-  return (
-    <div className={s.ticket}>
-      <Command image={firstCommand.image} title={firstCommand.title}/>
-      <Command image={secondCommand.image} title={secondCommand.title}/>
-      <div className={s.ticket__btn}>{price} руб.</div>
-      <div className={s.ticket__date}>
-        <div className={s.ticket__day}>{date[0]}</div>
-        <div className={s.ticket__time}>{date[1]}</div>
-      </div>
-    </div>
-  );
-};
+    return (
+        <div className={s.ticket}>
+            <Command image={firstCommand.image} title={firstCommand.title}/>
+            <Command image={secondCommand.image} title={secondCommand.title}/>
+            <div className={s.ticket__btn}>{price} руб.</div>
+            <div className={s.ticket__date}>
+                <div className={s.ticket__day}>{date[0]}</div>
+                <div className={s.ticket__time}>{date[1]}</div>
+            </div>
+        </div>
+    )
+}
 
-export default Ticket;
+export default Ticket

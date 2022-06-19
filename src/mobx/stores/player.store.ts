@@ -1,5 +1,5 @@
-import { makeAutoObservable, toJS } from 'mobx';
-import PlayerService from '../services/player.service';
+import { makeAutoObservable, toJS } from 'mobx'
+import PlayerService from '../services/player.service'
 
 interface IPlayers {
   images: Array<IImages>,
@@ -24,21 +24,21 @@ interface IPlayer {
 
 class PlayerStore {
 
-  playerService = new PlayerService()
-  players : Array<IPlayers> = []
+    playerService = new PlayerService()
+    players : Array<IPlayers> = []
 
-  constructor() {
-    makeAutoObservable(this)
-    this.loadProducts();
-  }
+    constructor() {
+        makeAutoObservable(this)
+        this.loadProducts()
+    }
 
-  getAllPlayers = () => {
-    return this.players
-  }
+    getAllPlayers = () => {
+        return this.players
+    }
 
-  loadProducts = async () => {
-    this.players = await this.playerService.getAllPlayers();
-  };
+    loadProducts = async () => {
+        this.players = await this.playerService.getAllPlayers()
+    }
 }
 
 export default new PlayerStore()

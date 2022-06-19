@@ -1,5 +1,5 @@
-import { host } from '../../assets/constants/host.constant';
-import axios from 'axios';
+import { host } from '../../assets/constants/host.constant'
+import axios from 'axios'
 
 export interface ICreateUser {
   name: string;
@@ -14,15 +14,15 @@ export interface ILoginUser {
 }
 
 class UserService {
-  regUser = async (user: ICreateUser) => {
-    return axios.post(`${host}/user/register`, user)
-  }
-  login = async (user: ILoginUser) => {
-    return axios.post(`${host}/user/login`, user)
-  }
-  refresh = async () => {
-    return axios.get(`${host}/user/self`, {withCredentials: true})
-  }
+    regUser = async (user: ICreateUser) => {
+        return axios.post(`${host}/user/register`, user)
+    }
+    login = async (user: ILoginUser) => {
+        return axios.post(`${host}/user/login`, user)
+    }
+    refresh = async () => {
+        return axios.get(`${host}/user/self`, {withCredentials: true})
+    }
 }
 
 export default UserService

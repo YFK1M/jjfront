@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { observer } from 'mobx-react-lite';
-import s from './Player.module.sass';
-import { logDOM } from '@testing-library/react';
+import { FC } from 'react'
+import { observer } from 'mobx-react-lite'
+import s from './Player.module.sass'
+import { logDOM } from '@testing-library/react'
 
 interface IPlayerArr {
   image: IImage,
@@ -26,14 +26,14 @@ interface IPlayer {
 
 const Player: FC<IPlayerArr> = observer(({image, player}) => {
 
-  return (
-    <div className={s.player} style={{backgroundImage: `url(${image.image_url})`}}>
-      <div className={s.player__title}>
-        <p>{player.name} {player.surname}.</p>
-        <p>{player.position}.</p>
-      </div>
-    </div>
-  );
-});
+    return (
+        <div className={s.player} style={{backgroundImage: `url(${image.image_url})`}}>
+            <div className={s.player__title}>
+                <p>{player.name} {player.surname}.</p>
+                <p>{player.position}.</p>
+            </div>
+        </div>
+    )
+})
 
-export default Player;
+export default Player

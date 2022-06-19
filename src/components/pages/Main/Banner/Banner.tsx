@@ -1,6 +1,6 @@
-import { FC, ReactChild } from 'react';
-import s from './Banner.module.sass';
-import { Link } from 'react-router-dom';
+import { FC, ReactChild } from 'react'
+import s from './Banner.module.sass'
+import { Link } from 'react-router-dom'
 
 interface IBanner {
   bannerNumber: string,
@@ -14,18 +14,18 @@ interface IBanner {
 
 const Banner: FC<IBanner> = ({ bannerNumber, bannerBackgroundUrl, h2, p, link, small }) => {
 
-  const titleSize = small ? s.banner__title_small : s.banner__title_big;
+    const titleSize = small ? s.banner__title_small : s.banner__title_big
 
-  return (
-    <Link to={link} className={s[bannerNumber]}>
-      <div className={s.banner} style={{ backgroundImage: `url(${bannerBackgroundUrl})` }}>
-        <div className={`${s.banner__title} ${titleSize}`}>
-          <h2 className={s.banner__h2}>{h2}</h2>
-          {p !== '' ? <p className={s.banner__p}>{p}</p> : <></>}
-        </div>
-      </div>
-    </Link>
-  );
-};
+    return (
+        <Link to={link} className={s[bannerNumber]}>
+            <div className={s.banner} style={{ backgroundImage: `url(${bannerBackgroundUrl})` }}>
+                <div className={`${s.banner__title} ${titleSize}`}>
+                    <h2 className={s.banner__h2}>{h2}</h2>
+                    {p !== '' ? <p className={s.banner__p}>{p}</p> : <></>}
+                </div>
+            </div>
+        </Link>
+    )
+}
 
-export default Banner;
+export default Banner

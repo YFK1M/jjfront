@@ -1,5 +1,5 @@
-import { makeAutoObservable, toJS } from 'mobx';
-import TicketService from '../services/ticket.service';
+import { makeAutoObservable, toJS } from 'mobx'
+import TicketService from '../services/ticket.service'
 
 interface ITicket {
   _id: string,
@@ -23,21 +23,21 @@ interface ICommand {
 
 class TicketStore {
 
-  ticketService = new TicketService()
-  ticket: Array<ITicket> = []
+    ticketService = new TicketService()
+    ticket: Array<ITicket> = []
 
-  constructor() {
-    makeAutoObservable(this)
-    this.loadAllTickets();
-  }
+    constructor() {
+        makeAutoObservable(this)
+        this.loadAllTickets()
+    }
 
-  getAllTickets = () => {
-    return this.ticket
-  }
+    getAllTickets = () => {
+        return this.ticket
+    }
 
-  loadAllTickets = async () => {
-    this.ticket = await this.ticketService.getAllTickets()
-  };
+    loadAllTickets = async () => {
+        this.ticket = await this.ticketService.getAllTickets()
+    }
 }
 
 export default new TicketStore()
