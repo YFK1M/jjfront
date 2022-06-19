@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react'
 import { observer } from 'mobx-react-lite'
 import ProductStore from '../../../mobx/stores/product.store'
-import { IProduct } from '../../../intarfaces/IProduct'
+import { IProduct } from '../../../intarfaces/product/IProduct'
 import s from './Merch.module.sass'
 
 const Merch: FC = observer(() => {

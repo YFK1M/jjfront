@@ -9,6 +9,8 @@ import UserStore from './mobx/stores/user.store'
 import Tickets from './components/pages/Tickets/Tickets'
 import Club from './components/pages/Club/Club'
 import Merch from './components/pages/Merch/Merch'
+import News from './components/pages/News/News'
+import Stadium from './components/pages/Stadium/Stadium'
 
 const App: FC = observer(() => {
 
@@ -26,6 +28,8 @@ const App: FC = observer(() => {
                         <Route path={'/matches'} element={<Tickets />} />
                         <Route path={'/club'} element={<Club />} />
                         <Route path={'/merch'} element={<Merch />} />
+                        <Route path={'/news'} element={<News />} />
+                        <Route path={'/stadium'} element={<Stadium />} />
                     </Routes>
                 </div>
             </main>

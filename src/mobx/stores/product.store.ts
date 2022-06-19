@@ -1,7 +1,7 @@
 import { makeAutoObservable} from 'mobx'
 import ProductService from '../services/product.service'
-import { IProductsType } from '../../intarfaces/IProductTypeInterface'
-import { ISortingProducts } from '../../intarfaces/ISortingProducts'
+import { IProductsType } from '../../intarfaces/product/IProductTypeInterface'
+import { ISortingProducts } from '../../intarfaces/product/ISortingProducts'
 
 class ProductStore {
 

@@ -18,6 +18,7 @@ class UserStore {
 
     constructor() {
         makeAutoObservable(this)
+        this.refresh()
     }
 
     createUser = async (user: ICreateUser) => {
