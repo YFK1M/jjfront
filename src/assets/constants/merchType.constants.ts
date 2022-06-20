@@ -1,4 +1,5 @@
 export const merchType = {
     CATEGORY: 'CATEGORY',
-    ITEM: 'ITEM'
+    EDIT_CATEGORY: 'EDIT_CATEGORY',
+    ADD_PRODUCT: 'ADD_PRODUCT'
 }

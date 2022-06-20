@@ -2,6 +2,8 @@ import { makeAutoObservable, toJS } from 'mobx'
 import ProductService from '../services/product.service'
 import { IProductsType, IProductsTypeCreate } from '../../intarfaces/product/IProductTypeInterface'
 import { ISortingProducts } from '../../intarfaces/product/ISortingProducts'
+import { IProductCreate } from '../../intarfaces/product/IProductCreate'
+import { IProductImagesCreate } from '../../intarfaces/product/IProductImagesCreate'
 
 class ProductStore {
 
@@ -31,6 +33,28 @@ class ProductStore {
 
     setProductType = async (category: IProductsTypeCreate) => {
         await this.productService.setProductType(category)
+        await this.loadProductsTypes()
+        await this.loadSortingProducts()
+    }
+
+    setProduct = async (product: IProductCreate) => {
+        await this.productService.setProduct(product)
+        await this.loadSortingProducts()
+    }
+
+    setProductImage = async (image: IProductImagesCreate) => {
+        await this.productService.setProductImage(image)
+        await this.loadSortingProducts()
+    }
+
+    deleteProductType = async (id: string) => {
+        await this.productService.deleteProductType(id)
+        await this.loadProductsTypes()
+        await this.loadSortingProducts()
+    }
+
+    updateProductType = async (id: string, category: IProductsTypeCreate) => {
+        await this.productService.updateProductType(id, category)
         await this.loadProductsTypes()
         await this.loadSortingProducts()
     }
