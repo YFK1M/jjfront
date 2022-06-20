@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import PlayerService from '../services/player.service'
 
 interface IPlayers {

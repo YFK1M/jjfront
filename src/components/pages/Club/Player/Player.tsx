@@ -1,7 +1,6 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { observer } from 'mobx-react-lite'
 import s from './Player.module.sass'
-import { logDOM } from '@testing-library/react'
 
 interface IPlayerArr {
   image: IImage,

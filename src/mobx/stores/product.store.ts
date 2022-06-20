@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import ProductService from '../services/product.service'
 import { IProductsType, IProductsTypeCreate } from '../../intarfaces/product/IProductTypeInterface'
 import { ISortingProducts } from '../../intarfaces/product/ISortingProducts'

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import s from './Tickets.module.sass'
 import { observer } from 'mobx-react-lite'
 import TicketStore from '../../../mobx/stores/ticket.store'

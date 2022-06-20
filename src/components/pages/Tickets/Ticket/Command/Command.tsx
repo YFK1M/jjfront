@@ -1,10 +1,10 @@
-import { FC, ReactChild } from 'react'
+import React, { FC, ReactNode } from 'react'
 import s from './Command.module.sass'
 
 interface ICommand {
   image: string,
   title: string,
-  children?: ReactChild,
+  children?: ReactNode,
 }
 
 const Command :FC<ICommand> = ({image, title}) => {

@@ -1,11 +1,11 @@
-import { FC, ReactChild } from 'react'
+import React, { FC, ReactNode } from 'react'
 import s from './Ticket.module.sass'
 import Command from './Command/Command'
 
 interface ITicket {
   price: number,
   match: IMatch,
-  children?: ReactChild,
+  children?: ReactNode,
 }
 
 interface IMatch {

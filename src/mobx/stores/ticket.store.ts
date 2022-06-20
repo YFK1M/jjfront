@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import TicketService from '../services/ticket.service'
 
 interface ITicket {

@@ -1,9 +1,9 @@
-import { FC, ReactChild } from 'react'
+import React, { FC, ReactNode } from 'react'
 import s from './Product.module.sass'
 import { Link } from 'react-router-dom'
 
 interface IProduct {
-  children?: ReactChild,
+  children?: ReactNode,
   id: string,
   title: string,
   price: number,

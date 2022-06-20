@@ -1,4 +1,4 @@
-import { FC, ReactChild } from 'react'
+import React, { FC, ReactNode } from 'react'
 import s from './Banner.module.sass'
 import { Link } from 'react-router-dom'
 
@@ -9,7 +9,7 @@ interface IBanner {
   p?: string,
   link: string,
   small: boolean,
-  children?: ReactChild,
+  children?: ReactNode,
 }
 
 const Banner: FC<IBanner> = ({ bannerNumber, bannerBackgroundUrl, h2, p, link, small }) => {

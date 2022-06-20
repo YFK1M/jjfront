@@ -1,11 +1,10 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import s from './Main.module.sass'
 import { bannersArray } from './bannersArray'
 import Banner from './Banner/Banner'
 import Product from './Product/Product'
 import ProductStore from '../../../mobx/stores/product.store'
 import { observer } from 'mobx-react-lite'
-import { toJS } from 'mobx'
 import { Link } from 'react-router-dom'
 
 const Main: FC = observer(() => {
