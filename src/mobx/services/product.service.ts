@@ -2,6 +2,8 @@ import { host } from '../../assets/constants/host.constant'
 import { IProductsTypeCreate } from '../../intarfaces/product/IProductTypeInterface'
 import { IProductCreate } from '../../intarfaces/product/IProductCreate'
 import { IProductImagesCreate } from '../../intarfaces/product/IProductImagesCreate'
+import { IProduct } from '../../intarfaces/product/IProduct'
+import { IProductEdit } from '../../intarfaces/product/IProductEdit'
 
 class ProductService {
 
@@ -25,12 +27,24 @@ class ProductService {
         return fetch(`${host}/product/create`, {method: 'POST', body: JSON.stringify(product), headers: {'Content-Type': 'application/json'}})
     }
 
+    updateProduct = async (id: string, product: IProductCreate) => {
+        return fetch(`${host}/product/${id}`, {method: 'PUT', body: JSON.stringify(product), headers: {'Content-Type': 'application/json'}})
+    }
+
     setProductImage = async (image: IProductImagesCreate) => {
         return fetch(`${host}/product/add-product-image`, {method: 'POST', body: JSON.stringify(image), headers: {'Content-Type': 'application/json'}})
     }
 
+    updateProductImage = async (id: string, productImage: IProductImagesCreate) => {
+        return fetch(`${host}/product/image/${id}`, {method: 'PUT', body: JSON.stringify(productImage), headers: {'Content-Type': 'application/json'}})
+    }
+
     deleteProductType = async (id: string) => {
         return fetch(`${host}/product/type/${id}`, {method: 'DELETE'})
+    }
+
+    deleteProduct = async (id: string) => {
+        return fetch(`${host}/product/delete/${id}`, {method: 'DELETE'})
     }
 
     updateProductType = async (id: string, category: IProductsTypeCreate) => {

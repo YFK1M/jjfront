@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import s from './App.module.sass'
 import Navbar from './components/app/Navbar/Navbar'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -10,8 +10,17 @@ import Club from './components/pages/Club/Club'
 import Merch from './components/pages/Merch/Merch'
 import News from './components/pages/News/News'
 import Stadium from './components/pages/Stadium/Stadium'
+import Cart from './components/pages/Cart/Cart'
+import UserStore from './mobx/stores/user.store'
+import CartStore from './mobx/stores/cart.store'
 
 const App: FC = observer(() => {
+
+    const user = UserStore.user
+    
+    useEffect(() => {
+        !!user && CartStore.getCustomerCart(user._id)
+    }, [user])
 
     return (
         <BrowserRouter>
@@ -25,6 +34,7 @@ const App: FC = observer(() => {
                         <Route path={'/merch'} element={<Merch />} />
                         <Route path={'/news'} element={<News />} />
                         <Route path={'/stadium'} element={<Stadium />} />
+                        <Route path={'/cart'} element={<Cart />} />
                     </Routes>
                 </div>
             </main>

@@ -1,21 +1,44 @@
-import React, { FC, memo, useRef, useState } from 'react'
+import React, { FC, memo, useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import ProductStore from '../../../mobx/stores/product.store'
-import { IProduct } from '../../../intarfaces/product/IProduct'
 import s from './Merch.module.sass'
 import UserStore from '../../../mobx/stores/user.store'
 import MerchAdminModal from './MerchAdminModal'
 import { merchType } from '../../../assets/constants/merchType.constants'
 import trashIcon from '../../../assets/images/all/trash.svg'
 import editIcon from '../../../assets/images/all/edit.svg'
+import { IProduct } from '../../../intarfaces/product/IProduct'
+import CartStore, { ICart } from '../../../mobx/stores/cart.store'
+import { IProductAmount } from '../../../intarfaces/cart/IProductAmount'
 
 const Merch: FC = observer(() => {
 
-    const isAdmin = UserStore.isAdmin
+    const user = UserStore.user
+    const cartLoad = CartStore.getCartLoad()
+    const [cart, setCart] = useState<ICart | null>()
+
+    useEffect(() => {
+        cartLoad && setCart(CartStore.getCart())
+    }, [cartLoad])
+    const isAdmin = UserStore.getAdminValue()
     const [isModalOpened, setIsModalOpened] = useState(false)
     const [modalType, setModalType] = useState('')
     const [modalEditMerchId, setModalEditMerchId] = useState('')
     const [modalAddProductId, setModalAddProductId] = useState('')
+    const [modalEditProduct, setModalEditProduct] = useState<IProduct>({
+        _id: '',
+        productsType_id: '',
+        price: 0,
+        title: '',
+        description: '',
+        productImage: [
+            {
+                _id: '',
+                product_id: '',
+                image_url: ''
+            }
+        ]
+    })
 
     const { current: handleOpenModal } = useRef(() => {
         setIsModalOpened(true)
@@ -35,18 +58,46 @@ const Merch: FC = observer(() => {
         setIsModalOpened(true)
     })
 
+    const { current: handleOpenEditProductAdminModal } = useRef((merchType: string, product: IProduct) => {
+        setModalType(merchType)
+        setModalEditProduct(product)
+        setIsModalOpened(true)
+    })
+
     const { current: handleOpenAddProductAdminModal } = useRef((merchType: string, type_id: string) => {
         setModalType(merchType)
         setModalAddProductId(type_id)
         setIsModalOpened(true)
     })
 
+    const handleAddProductToCart = (product: IProduct) => {
+        const productAmount = !!cart && cart.cart.find((productAmount: IProductAmount) => productAmount._id === product._id)?.amount
+        !!user && CartStore.addProductToCart({
+            user_id: user._id,
+            cartProduct: {
+                type: 'PRODUCT',
+                amount: productAmount || 1,
+                entity_id: product._id
+            }
+        })
+
+    }
+
     const sortingProductsArr = ProductStore.getSortingProducts()
 
-    const productsTypeArr = (product: IProduct) => (
+    const productsTypeArr = (product: IProduct) => product.productImage[0] && (
         <div className={s.category__item} key={product._id}>
-            <img src={product.productImage[0]?.image_url} alt={product.title} />
-            <button>{product.price} рублей</button>
+            <img className={s.category__item_img} src={product.productImage[0]?.image_url} alt={product.title} />
+            <button onClick={() => handleAddProductToCart(product)}>{product.price} рублей</button>
+            {
+                isAdmin && (
+                    <div className={s.category__icons}>
+                        <img src={trashIcon} alt={'Иконка удаления'} onClick={() => deleteProduct(product._id)} />
+                        <img src={editIcon} alt={'Иконка изменения'}
+                            onClick={() => handleOpenEditProductAdminModal(merchType.EDIT_PRODUCT, product)} />
+                    </div>
+                )
+            }
         </div>
     )
 
@@ -54,16 +105,24 @@ const Merch: FC = observer(() => {
         ProductStore.deleteProductType(id)
     }
 
+    const deleteProduct = (id: string) => {
+        ProductStore.deleteProduct(id)
+    }
+
     const sortingProducts = sortingProductsArr.map(
         productType => (isAdmin || !!productType.products.length) && (
             <div className={s.category} key={productType._id}>
                 <div className={s.category__title}>
                     <h2>{productType.title}</h2>
-                    <div className={s.category__icons}>
-                        <img src={trashIcon} alt={'Иконка удаления'} onClick={() => deleteProductCategory(productType._id)} />
-                        <img src={editIcon} alt={'Иконка изменения'}
-                            onClick={() => handleOpenEditMerchAdminModal(merchType.EDIT_CATEGORY, productType._id)} />
-                    </div>
+                    {
+                        isAdmin && (
+                            <div className={s.category__icons}>
+                                <img src={trashIcon} alt={'Иконка удаления'} onClick={() => deleteProductCategory(productType._id)} />
+                                <img src={editIcon} alt={'Иконка изменения'}
+                                    onClick={() => handleOpenEditMerchAdminModal(merchType.EDIT_CATEGORY, productType._id)} />
+                            </div>
+                        )
+                    }
                 </div>
                 <div className={s.category__content}>
                     {
@@ -94,7 +153,7 @@ const Merch: FC = observer(() => {
                         </div>
                         <MerchAdminModal modalType={modalType} isModalOpened={isModalOpened} handleCloseModal={handleCloseModal}
                             handleOpenModal={handleOpenModal} modalEditMerchId={modalEditMerchId}
-                            modalAddProductId={modalAddProductId} />
+                            modalAddProductId={modalAddProductId} modalEditProduct={modalEditProduct}/>
                     </>
                 )
             }

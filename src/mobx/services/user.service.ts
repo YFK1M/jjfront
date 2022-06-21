@@ -20,6 +20,9 @@ class UserService {
     login = async (user: ILoginUser) => {
         return axios.post(`${host}/user/login`, user, {withCredentials: true})
     }
+    logout = async () => {
+        return axios.post(`${host}/user/logout`, {}, {withCredentials: true})
+    }
     refresh = async () => {
         return axios.get(`${host}/user/self`, {withCredentials: true})
     }

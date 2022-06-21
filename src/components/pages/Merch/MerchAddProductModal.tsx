@@ -3,6 +3,7 @@ import ProductStore from '../../../mobx/stores/product.store'
 import { observer } from 'mobx-react-lite'
 import { IProduct } from '../../../intarfaces/product/IProduct'
 import { toJS } from 'mobx'
+import s from './Merch.module.sass'
 
 interface MerchAddProductModal {
     handleCloseModal: () => void,
@@ -42,12 +43,16 @@ const MerchAddProductModal: FC<MerchAddProductModal> = observer(({handleCloseMod
     },[price, title, description, imageUrl])
 
     return (
-        <form onSubmit={handleSubmitFrom}>
+        <form onSubmit={handleSubmitFrom} className={s.merch__form}>
+            <p>Цена</p>
             <input type='number' value={price} onChange={(e) => setPrice(Number(e.target.value))} placeholder={'Цена'}/>
+            <p>Название</p>
             <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder={'Название'}/>
+            <p>Описание</p>
             <input type='text' value={description} onChange={(e) => setDescription(e.target.value)} placeholder={'Описание'}/>
+            <p>Путь к картинке</p>
             <input type='text' value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder={'Путь к картинке'}/>
-            <input type='submit' value={'Реадктировать'}/>
+            <button>Создать</button>
         </form>
     )
 })
