@@ -1,19 +1,20 @@
 import { makeAutoObservable, toJS } from 'mobx'
 import CartService from '../services/cart.service'
 import { IAddProductToCart } from '../../intarfaces/cart/IAddProductToCart'
-import { IProductAmount } from '../../intarfaces/cart/IProductAmount'
+import { IAddTicketToCart } from '../../intarfaces/cart/IAddTicketToCart'
+import { ICart } from '../../intarfaces/cart/ICart'
 
-export interface ICart {
+export interface ICartConst {
   _id: string,
   user_id: string,
-    cart: Array<IProductAmount>
+    cart: Array<ICart>
   __v?: any
 }
 
 class CartStore {
 
     cartService = new CartService()
-    cart: null | ICart = null
+    cart: null | ICartConst = null
     cartLoad = false
 
     constructor() {
@@ -26,7 +27,7 @@ class CartStore {
 
     removeCustomerCart = async (userId: string) => {
         await this.cartService.removeCustomerCart(userId)
-        await this.getCustomerCart
+        await this.getCustomerCart(userId)
     }
 
     getCustomerCart = async (userId: string) => {
@@ -54,14 +55,34 @@ class CartStore {
         await this.getCustomerCart(product.user_id)
     }
 
+    changeTicketAmountInCart = async (ticket: IAddTicketToCart, amountType: number) => {
+        await this.cartService.changeProductAmountInCart({
+            user_id: ticket.user_id,
+            entity_id: ticket.cartTicket.entity_id,
+            amount: ticket.cartTicket.amount + amountType
+        })
+        await this.getCustomerCart(ticket.user_id)
+    }
+
     addProductToCart = async (product: IAddProductToCart) => {
         !this.cart && await this.createCustomerCart(product.user_id)
-        const productCart = this.cart?.cart.find((cartProduct) => cartProduct._id === product.cartProduct.entity_id)
+        const productCart = !!this.cart && this.cart.cart.find((cartProduct) => cartProduct.product._id === product.cartProduct.entity_id)
         productCart ?
             await this.changeProductAmountInCart(product, 1)
             :
             await this.cartService.addProductToCart(product)
         await this.getCustomerCart(product.user_id)
+    }
+
+    addTicketToCart = async (ticket: IAddTicketToCart) => {
+        !this.cart && await this.createCustomerCart(ticket.user_id)
+        const ticketCart = !!this.cart && this.cart.cart.find((cartTicket) => cartTicket.product._id === ticket.cartTicket.entity_id)
+        console.log(toJS(ticket.cartTicket.amount))
+        ticketCart ?
+            await this.changeTicketAmountInCart(ticket, 1)
+            :
+            await this.cartService.addTicketToCart(ticket)
+        await this.getCustomerCart(ticket.user_id)
     }
 }
 export default new CartStore()

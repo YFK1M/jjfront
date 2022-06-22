@@ -12,10 +12,10 @@ interface IProduct {
 
 const Product : FC<IProduct> = ({id, image, title, price}) => {
     return (
-        <Link to={`/product?id=${id}`} className={s.product}>
+        <div className={s.product}>
             <img className={s.product__img} src={image} alt={title} />
-            <button className={s.product__btn}>{price} руб.</button>
-        </Link>
+            <p className={s.product__btn}>{price} руб.</p>
+        </div>
     )
 }
 

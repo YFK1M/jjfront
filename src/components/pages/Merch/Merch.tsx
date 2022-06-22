@@ -8,14 +8,14 @@ import { merchType } from '../../../assets/constants/merchType.constants'
 import trashIcon from '../../../assets/images/all/trash.svg'
 import editIcon from '../../../assets/images/all/edit.svg'
 import { IProduct } from '../../../intarfaces/product/IProduct'
-import CartStore, { ICart } from '../../../mobx/stores/cart.store'
-import { IProductAmount } from '../../../intarfaces/cart/IProductAmount'
+import CartStore, { ICartConst } from '../../../mobx/stores/cart.store'
+import { ICart } from '../../../intarfaces/cart/ICart'
 
 const Merch: FC = observer(() => {
 
     const user = UserStore.user
     const cartLoad = CartStore.getCartLoad()
-    const [cart, setCart] = useState<ICart | null>()
+    const [cart, setCart] = useState<ICartConst | null>()
 
     useEffect(() => {
         cartLoad && setCart(CartStore.getCart())
@@ -71,7 +71,7 @@ const Merch: FC = observer(() => {
     })
 
     const handleAddProductToCart = (product: IProduct) => {
-        const productAmount = !!cart && cart.cart.find((productAmount: IProductAmount) => productAmount._id === product._id)?.amount
+        const productAmount = !!cart && cart.cart.find((productAmount: ICart) => productAmount.product._id === product._id)?.amount
         !!user && CartStore.addProductToCart({
             user_id: user._id,
             cartProduct: {

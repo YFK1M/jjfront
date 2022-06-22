@@ -6,6 +6,7 @@ import Product from './Product/Product'
 import ProductStore from '../../../mobx/stores/product.store'
 import { observer } from 'mobx-react-lite'
 import { Link } from 'react-router-dom'
+import { toJS } from 'mobx'
 
 const Main: FC = observer(() => {
 
@@ -18,13 +19,14 @@ const Main: FC = observer(() => {
             small={val.small} />)
 
     const products = productArray.map((val) =>
-        <Product
+        val.productImage[0] && <Product
             key={val.id}
             id={val.id}
             title={val.title}
             price={val.price}
             image={val.productImage[0].image_url}
-        />)
+        />
+    )
 
     return (
         <div className={s.main}>

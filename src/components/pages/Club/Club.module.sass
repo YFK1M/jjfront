@@ -24,7 +24,21 @@
     &__h1
       font-size: 26px
 
+    &__content
+      grid-template-columns: repeat(3, 1fr)
+
 @media (max-width: 768px)
   .club
     &__h1
       font-size: 20px
+
+    &__content
+      grid-template-columns: repeat(2, 1fr)
+
+@media (max-width: 440px)
+  .club
+    &__h1
+      font-size: 16px
+
+    &__content
+      grid-template-columns: repeat(1, 1fr)

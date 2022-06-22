@@ -2,6 +2,8 @@ import { host } from '../../assets/constants/host.constant'
 import axios from 'axios'
 import { IAddProductToCart } from '../../intarfaces/cart/IAddProductToCart'
 import { IChangeProductAmountInCart } from '../../intarfaces/cart/IChangeProductAmountInCart'
+import { IAddTicketToCart } from '../../intarfaces/cart/IAddTicketToCart'
+import { toJS } from 'mobx'
 
 class CartService {
 
@@ -19,6 +21,11 @@ class CartService {
 
     addProductToCart = async (product: IAddProductToCart) => {
         return axios.post(`${host}/cart/add-product-to-cart`, product)
+    }
+
+    addTicketToCart = async (ticket: IAddTicketToCart) => {
+        console.log(toJS(ticket))
+        return axios.post(`${host}/cart/add-ticket-to-cart`, ticket)
     }
 
     changeProductAmountInCart = async (product: IChangeProductAmountInCart) => {

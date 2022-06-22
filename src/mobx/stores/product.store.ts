@@ -10,11 +10,12 @@ class ProductStore {
 
     productService = new ProductService()
     productTypes: Array<IProductsType> = []
-    product = []
+    product: Array<any> = []
     sortingProducts : Array<ISortingProducts>= []
 
     constructor() {
         makeAutoObservable(this)
+        this.loadProducts()
         this.loadProductsTypes().then(
             () => this.loadSortingProducts()
         )

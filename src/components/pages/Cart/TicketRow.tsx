@@ -4,13 +4,13 @@ import CartStore from '../../../mobx/stores/cart.store'
 import { observer } from 'mobx-react-lite'
 import UserStore from '../../../mobx/stores/user.store'
 
-interface ProductRow {
+interface TicketRow {
   product: any,
   amount: number,
   children?: ReactNode,
 }
 
-const ProductRow: FC<ProductRow> = observer(({product, amount}) => {
+const TicketRow: FC<TicketRow> = observer(({product, amount}) => {
     const user = UserStore.user
 
     const handleUpdAmountProduct = (amountValue: number) => {
@@ -26,11 +26,10 @@ const ProductRow: FC<ProductRow> = observer(({product, amount}) => {
 
     return (
         <div className={s.cart__row}>
-            <div className={s.cart__row_left}>
-                <div className={s.cart__row_image}>
-                    <img src={product.productImage[0].image_url} alt={product.title} />
-                </div>
-                <p>{product.title}</p>
+            <div className={`${s.cart__row_left} ${s.cart__row_ticket}`}>
+                <p>Билет на матч</p>
+                <p>{product.match_id.first_command_id.title} против {product.match_id.second_command_id.title}</p>
+                <p>{product.match_id.date}</p>
             </div>
             <div className={s.cart__row_right}>
                 <p className={s.cart__row_item}>{product.price} Руб.</p>
@@ -48,4 +47,4 @@ const ProductRow: FC<ProductRow> = observer(({product, amount}) => {
 
 })
 
-export default memo(ProductRow)
+export default memo(TicketRow)

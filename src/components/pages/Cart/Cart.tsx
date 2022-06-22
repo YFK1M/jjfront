@@ -3,8 +3,9 @@ import { observer } from 'mobx-react-lite'
 import s from './Cart.module.sass'
 import UserStore from '../../../mobx/stores/user.store'
 import { useNavigate } from 'react-router-dom'
-import CartStore, { ICart } from '../../../mobx/stores/cart.store'
+import CartStore, { ICartConst } from '../../../mobx/stores/cart.store'
 import ProductRow from './ProductRow'
+import TicketRow from './TicketRow'
 
 interface ICartFC {
     children?: ReactNode,
@@ -15,7 +16,7 @@ const Cart: FC<ICartFC> = observer(() => {
     const userLoad = UserStore.userLoad
     const navigate = useNavigate()
     const cartLoad = CartStore.getCartLoad()
-    const [cart, setCart] = useState<ICart | null>()
+    const [cart, setCart] = useState<ICartConst | null>()
     
     useEffect(() => {
         userLoad && !user && navigate('/')
@@ -23,13 +24,19 @@ const Cart: FC<ICartFC> = observer(() => {
 
     useEffect(() => {
         cartLoad && setCart(CartStore.getCart())
+        console.log(cartLoad)
     }, [cartLoad])
 
-    const zxc = () => !!cart && cart.cart.map(item => <ProductRow key={item._id} id={item._id} amount={item.amount} image={item.productImage} title={item.title} price={item.price}/>)
+    const productRow = () => !!cart && cart.cart.map(item => {
+        switch (item.type) {
+        case 'PRODUCT': return <ProductRow key={item.product._id} product={item.product} amount={item.amount}/>
+        case 'TICKET': return <TicketRow key={item.product._id} product={item.product} amount={item.amount}/>
+        }
+    })
 
     const clearCart = () => {
         !!user && CartStore.removeCustomerCart(user._id)
-        navigate('/')
+        window.alert('Заявка успешно отправлена на подтверждение адмсинистатору, после подверждения администратор отправит вам информацию об оплате на почту')
     }
     
     return (
@@ -47,7 +54,7 @@ const Cart: FC<ICartFC> = observer(() => {
                                     <p className={s.cart__row_head}>Сумма</p>
                                 </div>
                             </div>
-                            {zxc()}
+                            {productRow()}
                         </div>
                         <button className={s.cart__buy} onClick={clearCart}>Купить</button>
                     </>

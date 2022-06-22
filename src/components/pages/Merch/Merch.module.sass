@@ -29,9 +29,9 @@
   margin-bottom: 50px
 
   &__title
-    width: 800px
+    width: 60%
     font-size: 32px
-    padding: 24px 0
+    padding: 24px 15px
     background: #6DB4D0
     text-transform: uppercase
     color: #fff
@@ -54,7 +54,7 @@
   &__content
     display: flex
     flex-wrap: wrap
-    margin-top: 50px
+    margin-top: 30px
 
   &__item
     padding: 10px 15px
@@ -67,6 +67,7 @@
     width: 280px
     justify-content: center
     margin-right: 20px
+    margin-top: 20px
     cursor: pointer
     position: relative
 
@@ -88,3 +89,64 @@
     color: #434343
     font-size: 64px
     cursor: pointer
+
+@media screen and (max-width: 1440px)
+  .category
+    margin-bottom: 40px
+
+    &__title
+      font-size: 24px
+      padding: 18px 12px
+
+    &__content
+      margin-top: 24px
+
+    &__item
+      height: 280px
+      width: 240px
+      margin-right: 16px
+      margin-top: 16px
+
+      &_img
+        width: 220px
+
+@media screen and (max-width: 1024px)
+  .category
+    margin-bottom: 30px
+
+    &__title
+      font-size: 20px
+      padding: 12px 10px
+
+    &__content
+      margin-top: 18px
+
+    &__item
+      height: 230px
+      width: 200px
+      margin-right: 12px
+      margin-top: 12px
+
+      &_img
+        width: 170px
+
+@media screen and (max-width: 768px)
+  .category
+    margin-bottom: 20px
+
+    &__title
+      width: 100%
+      font-size: 16px
+      padding: 12px 10px
+
+    &__content
+      margin-top: 12px
+
+    &__item
+      height: 200px
+      width: 150px
+      margin-right: 8px
+      margin-top: 8px
+
+      &_img
+        width: 130px

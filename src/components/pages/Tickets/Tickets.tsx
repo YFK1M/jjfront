@@ -10,7 +10,7 @@ const Tickets: FC = observer(() => {
 
     const tickets = TicketStore.getAllTickets().map(ticket => {
         return (
-            <Ticket key={ticket._id} match={ticket.match_id} price={ticket.price}/>
+            <Ticket key={ticket._id} _id={ticket._id} match={ticket.match_id} price={ticket.price}/>
         )
     })
 
